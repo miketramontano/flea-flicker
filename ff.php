@@ -45,6 +45,13 @@
 					padding: 10px 5px;
 				}
 			}
+			#button-clear {
+				border: 2px solid red;
+				color: red;
+				cursor: pointer;
+				margin: 50px 10px;
+				padding: 10px;
+			}
 			
 		</style>
 	</head>
@@ -101,7 +108,7 @@
 		});
 		
 		if (taken.length > 0) {
-			$('#content').append('<div id="button-clear">Clear Saved Picks</div>');
+			$('#content').append('<div id="button-clear">Clear Saved Picks (No longer save between page refreshes)</div>');
 			$('#button-clear').click(function(){
 				$.ajax({
 					url: '',
