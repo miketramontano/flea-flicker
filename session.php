@@ -6,6 +6,7 @@ function strclean($str) {
 
 session_start();
 
+// pick control
 if (isset($_POST['add'])) {
 	if (!is_array($_SESSION['stash'])) { $_SESSION['stash'] = array(); }
 	$_SESSION['stash'][strclean($_POST['add'])] = 1;
@@ -15,6 +16,14 @@ if (isset($_POST['add'])) {
 	exit;
 } else if (isset($_POST['clear'])) {
 	$_SESSION['stash'] = array();
+	exit;
+}
+
+// star/favorite control
+if (isset($_POST['star'])) {
+	$_SESSION['star'] = explode("\n", $_POST['star']);
+	array_walk($_SESSION['star'], 'trim');
+	header('location: ff.php');
 	exit;
 }
 
