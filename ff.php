@@ -113,6 +113,7 @@
 			$(splits).each(function(j, card) {
 				card = card.replace(',','').replace(/&nbsp;/g, ' ').trim();
 				var pos = card.substr(card.indexOf(':')+1).replace(/[0-9]/g, '').trim().toLowerCase();
+				pos = pos.replace(/^def$/, 'dst').replace(/^fb$/, 'rb');
 
 				if (filtersApplied.indexOf(pos) === -1) {
 					$filters.append($filterButton(pos));
