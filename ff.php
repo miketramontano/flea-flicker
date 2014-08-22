@@ -26,7 +26,7 @@
 			.pos-wr { background-color: #cff; }
 			.pos-te { background-color: #ffc; }
 			.pos-dst, .pos-def { background-color: #cfa; }
-			.pos-k { background-color: #ccc; }
+			.pos-k { background-color: #bcb; }
 			.taken {
 				background-color: #fff;
 				border: none;
