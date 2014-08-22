@@ -21,8 +21,11 @@ if (isset($_POST['add'])) {
 
 // star/favorite control
 if (isset($_POST['star'])) {
-	$_SESSION['star'] = explode("\n", $_POST['star']);
-	array_walk($_SESSION['star'], 'trim');
+	$_SESSION['star'] = array();
+	$stars = explode("\n", $_POST['star']);
+	foreach ($stars as $star) {
+		$_SESSION['star'][] = ucwords(strclean(trim($star)));
+	}
 	header('location: ff.php');
 	exit;
 }

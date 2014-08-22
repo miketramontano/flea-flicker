@@ -64,6 +64,7 @@
 	<script>
 		taken = ["<?= isset($_SESSION['stash']) ? implode('","', array_keys($_SESSION['stash'])) : '' ?>"];
 		star = ["<?= isset($_SESSION['star']) ? implode('","', $_SESSION['star']) : '' ?>"];
+		star_found = [];
 		/* Sample 2014 NFL Draft Lists */
 		lists = [
 			"Calvin Johnson, DET:WR;Jamaal Charles, KC:RB;LeSean McCoy, PHI:RB;Matt Forte, CHI:RB;Demaryius Thomas, DEN:WR;Dez Bryant, DAL:WR;Eddie Lacy, GB:RB;Adrian Peterson, MIN:RB;Giovani Bernard, CIN:RB;DeMarco Murray, DAL:RB;Jimmy Graham, NO:TE;Montee Ball, DEN:RB;Julio Jones, ATL:WR;Andre Ellington, ARI:RB;Le'Veon Bell, PIT:RB;C.J. Spiller, BUF:RB;Doug Martin, TB:RB;A.J. Green, CIN:WR;Alshon Jeffery, CHI:WR;Brandon Marshall, CHI:WR;Arian Foster, HOU:RB;Antonio Brown, PIT:WR;Peyton Manning, DEN:QB;Reggie Bush, DET:RB;Shane Vereen, NE:RB;Drew Brees, NO:QB;Rashad Jennings, NYG:RB;Joique Bell, DET:RB;Jordy Nelson, GB:WR;Aaron Rodgers, GB:QB;Marshawn Lynch, SEA:RB;Alfred Morris, WAS:RB;Randall Cobb, GB:WR;Keenan Allen, SD:WR;Michael Floyd, ARI:WR;Pierre Garcon, WAS:WR;Julius Thomas, DEN:TE;Ray Rice, BAL:RB;Andre Johnson, HOU:WR;Trent Richardson, IND:RB;Ben Tate, CLE:RB;Michael Crabtree, SF:WR;Roddy White, ATL:WR;Rob Gronkowski, NE:TE;Zac Stacy, STL:RB;T.Y. Hilton, IND:WR;Ryan Mathews, SD:RB;Vincent Jackson, TB:WR;Pierre Thomas, NO:RB;Jeremy Maclin, PHI:WR;Andrew Luck, IND:QB;Wes Welker, DEN:WR;DeSean Jackson, WAS:WR;Jordan Reed, WAS:TE;Percy Harvin, SEA:WR;Victor Cruz, NYG:WR;Bishop Sankey, TEN:RB;Jay Cutler, CHI:QB;Jordan Cameron, CLE:TE;Matthew Stafford, DET:QB;Matt Ryan, ATL:QB;Chris Johnson, NYJ:RB;Robert Griffin III, WAS:QB;Cordarrelle Patterson, MIN:WR;Kendall Wright, TEN:WR;Nick Foles, PHI:QB;Toby Gerhart, JAX:RB;Vernon Davis, SF:TE;Larry Fitzgerald, ARI:WR;Jason Witten, DAL:TE;Julian Edelman, NE:WR;Lamar Miller, MIA:RB;Stevan Ridley, NE:RB;Cam Newton, CAR:QB;Russell Wilson, SEA:QB;Torrey Smith, BAL:WR;Tom Brady, NE:QB;Steven Jackson, ATL:RB;Golden Tate, DET:WR;Greg Olsen, CAR:TE;Colin Kaepernick, SF:QB;Mike Wallace, MIA:WR;Emmanuel Sanders, DEN:WR;Tony Romo, DAL:QB;Dennis Pitta, BAL:TE;Eric Decker, NYJ:WR;Charles Clay, MIA:TE;Marques Colston, NO:WR;Rueben Randle, NYG:WR;Sammy Watkins, BUF:WR;Zach Ertz, PHI:TE;Kyle Rudolph, MIN:TE;Mike Evans, TB:WR;Tavon Austin, STL:WR;Markus Wheaton, PIT:WR;Dwayne Bowe, KC:WR;Seattle, SEA:Def;Carolina, CAR:Def;Darren McFadden, OAK:RB;Danny Woodhead, SD:RB;Terrance Williams, DAL:WR;St. Louis, STL:Def;Ben Roethlisberger, PIT:QB;Philip Rivers, SD:QB;Ladarius Green, SD:TE;San Francisco, SF:Def;DeAngelo Williams, CAR:RB;Martellus Bennett, CHI:TE;Carson Palmer, ARI:QB;Reggie Wayne, IND:WR;Garrett Graham, HOU:TE;Denver, DEN:Def;Bernard Pierce, BAL:RB;Kansas City, KC:Def;Knowshon Moreno, MIA:RB;Darren Sproles, PHI:RB;Andy Dalton, CIN:QB;Ryan Tannehill, MIA:QB;Brandin Cooks, NO:WR;Maurice Jones-Drew, OAK:RB;Terrance West, CLE:RB;New England, NE:Def;Lance Moore, PIT:WR;Mark Ingram, NO:RB;Delanie Walker, TEN:TE;Doug Baldwin, SEA:WR;DeAndre Hopkins, HOU:WR;Kelvin Benjamin, CAR:WR;Greg Jennings, MIN:WR;Frank Gore, SF:RB;James Jones, OAK:WR;Eric Ebron, DET:TE;LeGarrette Blount, PIT:RB;Eli Manning, NYG:QB;Lance Dunbar, DAL:RB;Chris Givens, STL:WR;Jared Cook, STL:TE;Hakeem Nicks, IND:WR;Joe Flacco, BAL:QB;Dwayne Allen, IND:TE;Cincinnati, CIN:Def;Andrew Hawkins, CLE:WR;Chicago, CHI:Def;Riley Cooper, PHI:WR;Tyler Eifert, CIN:TE;Steven Hauschka, SEA:K;Dexter McCluster, TEN:RB;Green Bay, GB:Def;Steve Smith, BAL:WR;Sam Bradford, STL:QB;Marqise Lee, JAX:WR;Anquan Boldin, SF:WR;Danny Amendola, NE:WR;Bryce Brown, BUF:RB;Aaron Dobson, NE:WR;Pittsburgh, PIT:Def;Arizona, ARI:Def;Donald Brown, SD:RB;Matt Prater, DEN:K;Jacquizz Rodgers, ATL:RB;Alex Smith, KC:QB;Cecil Shorts, JAX:WR;Travis Kelce, KC:TE;Jarrett Boykin, GB:WR;Justin Hunter, TEN:WR;Carlos Hyde, SF:RB;Rod Streater, OAK:WR;Jeremy Hill, CIN:RB;Heath Miller, PIT:TE;Stephen Gostkowski, NE:K;Jace Amaro, NYJ:TE;Phil Dawson, SF:K;Brandon LaFell, NE:WR;Jordan Matthews, PHI:WR;Richard Rodgers, GB:TE;Justin Tucker, BAL:K;Levine Toilolo, ATL:TE;Chris Ivory, NYJ:RB;Nick Folk, NYJ:K;Antonio Gates, SD:TE;Kenny Stills, NO:WR;Nick Novak, SD:K;Kenbrell Thompkins, NE:WR;Josh McCown, TB:QB;Luke Willson, SEA:TE;Austin Seferian-Jenkins, TB:TE;Coby Fleener, IND:TE;Dan Bailey, DAL:K;Kenny Britt, STL:WR;Brian Hartline, MIA:WR;Marcedes Lewis, JAX:TE;Robbie Gould, CHI:K;Nate Freese, DET:K;Mason Crosby, GB:K;Greg Zuerlein, STL:K;Jermaine Gresham, CIN:TE;Miles Austin, CLE:WR;Jerrel Jernigan, NYG:WR;Jonathan Stewart, CAR:RB;Mohamed Sanu, CIN:WR;John Carlson, ARI:TE",
@@ -79,8 +80,19 @@
 				var pos = card.substr(card.indexOf(':')+1).replace(/[0-9]/g, '').trim().toLowerCase();
 				var name = card.substr(0, card.indexOf(':'));
 				$('#row'+(i+1)).append('<div class="card pos-'+pos+($.inArray(name, taken)>-1?' taken':'')+($.inArray(name, star)>-1?' star':'')+'" data-name="'+name+'">'+card+'</div>');
+				if ($.inArray(name, star) > -1) {
+					star_found.push(name);
+				}
 			});
 		});
+		
+		Array.prototype.diff = function(a) {
+			return this.filter(function(i) {return a.indexOf(i) < 0;});
+		};
+		var star_missing = star.diff(star_found);
+		if (star_missing.length) {
+			console.log(star_missing);
+		}
 		
 		$('.card').click(function() {
 			if ($(this).hasClass('taken')) {
