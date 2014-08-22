@@ -52,6 +52,7 @@
 <body>
 
 	<div id="content" class="container">
+		<div class="header"><h1>Flea Flicker</h1></div>
 		<div class="row">
 			
 			<div id="row1" class="col-sm-3"></div>
