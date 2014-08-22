@@ -11,9 +11,10 @@
 				padding-top: 20px;
 			}
 			.card {
+				cursor: pointer;
 				font-size: 1em;
 				margin: 5px 0px;
-				padding: 2px 5px;				
+				padding: 2px 5px;
 			}
 			.star {
 				border-bottom: 1px solid black;
