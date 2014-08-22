@@ -10,6 +10,10 @@
 			#content {
 				padding-top: 20px;
 			}
+			#header a {
+				color: black;
+				text-decoration: none;
+			}
 			.card {
 				cursor: pointer;
 				font-size: 1em;
@@ -52,7 +56,7 @@
 <body>
 
 	<div id="content" class="container">
-		<div class="header"><h1>Flea Flicker</h1></div>
+		<div id="header"><h1><a href="<?= str_replace('ff.php', '', $_SERVER['REQUEST_URI']) ?>">Flea Flicker</a></h1></div>
 		<div class="row">
 			
 			<div id="row1" class="col-sm-3"></div>

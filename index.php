@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -41,7 +42,7 @@
 				<form method="POST" action="ff.php">
 					<div class="form-field-group">
 						<label>Favorites:<span class="detail">Put each player on a separate line followed by team abbreviation (eg: Dez Bryant DAL).</span></label>
-						<textarea rows="10" cols="50" name="star"></textarea>
+						<textarea rows="10" cols="50" name="star"><?= isset($_SESSION['star']) ? implode("\n", $_SESSION['star']) : '' ?></textarea>
 					</div>
 					<div class="form-button-group">
 						<input type="submit" name="submit" value="Go!"/>
