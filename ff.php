@@ -25,7 +25,7 @@
 			.pos-rb, .pos-fb { background-color: #fcc; }
 			.pos-wr { background-color: #cff; }
 			.pos-te { background-color: #ffc; }
-			.pos-dst, .pos-def { background-color: #fcf; }
+			.pos-dst, .pos-def { background-color: #cfa; }
 			.pos-k { background-color: #ccc; }
 			.taken {
 				background-color: #fff;
