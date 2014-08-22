@@ -6,7 +6,7 @@
 		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 		<style>
-			
+
 			#content {
 				padding-top: 20px;
 			}
@@ -23,7 +23,7 @@
 			.star {
 				border-bottom: 1px solid black;
 				border-top: 1px solid black;
-				font-weight: bold; 
+				font-weight: bold;
 			}
 			.pos-qb { background-color: #ccf; }
 			.pos-rb, .pos-fb { background-color: #fcc; }
@@ -50,23 +50,32 @@
 				margin: 50px 10px;
 				padding: 10px;
 			}
-			
+
+			.filters { text-align: right; padding: 16px; }
+			.filters .hint { font-style: italic; color: #ccc; }
+			.filters input[type=checkbox] {
+				position:absolute;
+				z-index: -1;
+				opacity: 0;
+			}
 		</style>
 	</head>
 <body>
 
 	<div id="content" class="container">
 		<div id="header"><h1><a href="<?= str_replace('ff.php', '', $_SERVER['REQUEST_URI']) ?>">Flea Flicker</a></h1></div>
+		<div class="row filters"><span class="hint">(deselect to hide position)</span>
+		</div><!-- .row .filters -->
 		<div class="row">
-			
+
 			<div id="row1" class="col-sm-3"></div>
 			<div id="row2" class="col-sm-3"></div>
 			<div id="row3" class="col-sm-3"></div>
 			<div id="row4" class="col-sm-3"></div>
-			
+
 		</div>
 	</div>
-	
+
 	<script>
 		taken = ["<?= isset($_SESSION['stash']) ? implode('","', array_keys($_SESSION['stash'])) : '' ?>"];
 		star = ["<?= isset($_SESSION['star']) ? implode('","', $_SESSION['star']) : '' ?>"];
@@ -79,11 +88,37 @@
 			"Jamaal Charles KC: RB;Matt Forte CHI: RB;LeSean McCoy PHI: RB;Adrian Peterson MIN: RB;Calvin Johnson DET: WR;Demaryius Thomas DEN: WR;Jimmy Graham NO: TE;DeMarco Murray DAL: RB;Giovani Bernard CIN: RB;Dez Bryant DAL: WR;Brandon Marshall CHI: WR;Julio Jones ATL: WR;A.J. Green CIN: WR;Eddie Lacy GB: RB;Jordy Nelson GB: WR;Montee Ball DEN: RB;Le'Veon Bell PIT: RB;Andre Ellington ARI: RB;Antonio Brown PIT: WR;Shane Vereen NE: RB;Rob Gronkowski NE: TE;Alshon Jeffery CHI: WR;Arian Foster HOU: RB;Doug Martin TB: RB;Zac Stacy STL: RB;Randall Cobb GB: WR;Marshawn Lynch SEA: RB;Larry Fitzgerald ARI: WR;Pierre Garcon WAS: WR;Michael Crabtree SF: WR;Julius Thomas DEN: TE;Peyton Manning DEN: QB;Andre Johnson HOU: WR;Vincent Jackson TB: WR;Toby Gerhart JAC: RB;Alfred Morris WAS: RB;Reggie Bush DET: RB;Drew Brees NO: QB;Ray Rice BAL: RB;Joique Bell DET: RB;Aaron Rodgers GB: QB;Roddy White ATL: WR;Michael Floyd ARI: WR;Wes Welker DEN: WR;Victor Cruz NYG: WR;Rashad Jennings NYG: RB;C.J. Spiller BUF: RB;Bishop Sankey TEN: RB;Ryan Mathews SD: RB;Kendall Wright TEN: WR;Keenan Allen SD: WR;Emmanuel Sanders DEN: WR;Cordarrelle Patterson MIN: WR;Vernon Davis SF: TE;Julian Edelman NE: WR;Matthew Stafford DET: QB;Jeremy Maclin PHI: WR;Eric Decker NYJ: WR;Marques Colston NO: WR;Jordan Cameron CLE: TE;Jason Witten DAL: TE;Golden Tate DET: WR;Torrey Smith BAL: WR;Mike Wallace MIA: WR;DeSean Jackson WAS: WR;Sammy Watkins BUF: WR;Chris Johnson NYJ: RB;Dennis Pitta BAL: TE;Terrance Williams DAL: WR;Pierre Thomas NO: RB;Ben Tate CLE: RB;Trent Richardson IND: RB;Fred Jackson BUF: RB;Lamar Miller MIA: RB;Frank Gore SF: RB;Danny Woodhead SD: RB;Rueben Randle NYG: WR;Reggie Wayne IND: WR;Brandin Cooks NO: WR;T.Y. Hilton IND: WR;Colin Kaepernick SF: QB;Maurice Jones-Drew OAK: RB;Mike Evans TB: WR;Percy Harvin SEA: WR;Nick Foles PHI: QB;Tom Brady NE: QB;Matt Ryan ATL: QB;Tony Romo DAL: QB;Harry Douglas ATL: WR;Andrew Luck IND: QB;Kelvin Benjamin CAR: WR;Darren Sproles PHI: RB;Brian Hartline MIA: WR;Riley Cooper PHI: WR;Kyle Rudolph MIN: TE;Zach Ertz PHI: TE;Justin Hunter TEN: WR;Greg Olsen CAR: TE;Jordan Reed WAS: TE;DeAngelo Williams CAR: RB;Stevan Ridley NE: RB;Devonta Freeman ATL: RB;Terrance West CLE: RB;Jay Cutler CHI: QB;Robert Griffin III WAS: QB;Steven Jackson ATL: RB;Dexter McCluster TEN: RB;Bernard Pierce BAL: RB;Andre Williams NYG: RB;Doug Baldwin SEA: WR;Cecil Shorts JAC: WR;Anquan Boldin SF: WR;Knowshon Moreno MIA: RB;Carlos Hyde SF: RB;Khiry Robinson NO: RB;Christine Michael SEA: RB;Dwayne Bowe KC: WR;Lance Dunbar DAL: RB;Philip Rivers SD: QB;Ben Roethlisberger PIT: QB;Seahawks SEA: DST;Cam Newton CAR: QB;Rod Streater OAK: WR;Jordan Matthews PHI: WR;Tavon Austin STL: WR;Hakeem Nicks IND: WR;Robert Woods BUF: WR;DeAndre Hopkins HOU: WR;John Brown ARI: WR;Jarrett Boykin GB: WR;Cardinals ARI: DST;Kenny Stills NO: WR;Stepfan Taylor ARI: RB;Antonio Gates SD: TE;Heath Miller PIT: TE;Patriots NE: DST;Jeremy Hill CIN: RB;Ladarius Green SD: TE;Darren McFadden OAK: RB;Tre Mason STL: RB;Travaris Cadet NO: RB;LeGarrette Blount PIT: RB;Greg Jennings MIN: WR;Jonathan Grimes HOU: RB;Rams STL: DST;Charles Clay MIA: TE;Steve Smith BAL: WR;Kenny Britt STL: WR;James Jones OAK: WR;Marvin Jones CIN: WR;Marqise Lee JAC: WR;Danny Amendola NE: WR;Mohamed Sanu CIN: WR;Markus Wheaton PIT: WR;Andrew Hawkins CLE: WR;Jerricho Cotchery CAR: WR;Broncos DEN: DST;Miles Austin CLE: WR;Odell Beckham NYG: WR;Chris Ivory NYJ: RB;49ers SF: DST;Knile Davis KC: RB;Carson Palmer ARI: QB;Steelers PIT: DST;Lance Moore PIT: WR;Andre Holmes OAK: WR;Dri Archer PIT: RB;Martellus Bennett CHI: TE;Sam Bradford STL: QB;Russell Wilson SEA: QB;Panthers CAR: DST;Roy Helu WAS: RB;Jerick McKinnon MIN: RB;James White NE: RB;Delanie Walker TEN: TE;Eric Ebron DET: TE;Stephen Gostkowski NE: K;Brian Quick STL: WR;Malcom Floyd SD: WR;Andre Roberts WAS: WR;Mike Williams BUF: WR;Andy Dalton CIN: QB;Bengals CIN: DST;Packers GB: DST;Phil Dawson SF: K;Dwayne Allen IND: TE;Jared Cook STL: TE;Garrett Graham HOU: TE;Mike Tolbert CAR: FB;Ronnie Hillman DEN: RB;Bobby Rainey TB: RB;Mark Ingram NO: RB;James Starks GB: RB;Ryan Tannehill MIA: QB;Alex Smith KC: QB;Timothy Wright TB: TE;Marcedes Lewis JAC: TE;Bears CHI: DST;Jeremy Kerley NYJ: WR;Josh McCown TB: QB",
 		];
 
+		/** positional filters */
+		var $filterButton = function(label) {
+			var $label, $input, $button;
+			$label = $("<label>").addClass("btn btn-primary active").append(label.toUpperCase());
+			$input = $("<input>")
+				.attr({ type: "checkbox", id: "filter-" + label })
+				.val(label)
+				.click(function() {
+					$(this).parent().toggleClass("active");
+
+					if ($(this).parent().hasClass("active")) {
+						$("div.pos-" + $(this).val()).show();
+					} else {
+						$("div.pos-" + $(this).val()).hide();
+					}
+			});
+
+			return $label.append($input);
+		}, $filters = $("<div>").addClass("btn-group").data("toggle", "button"), filtersApplied = [];
+
 		$(lists).each(function(i, val) {
 			var splits = val.split(';');
 			$(splits).each(function(j, card) {
 				card = card.replace(',','').replace(/&nbsp;/g, ' ').trim();
 				var pos = card.substr(card.indexOf(':')+1).replace(/[0-9]/g, '').trim().toLowerCase();
+
+				if (filtersApplied.indexOf(pos) === -1) {
+					$filters.append($filterButton(pos));
+					filtersApplied.push(pos);
+				}
+
 				var name = card.substr(0, card.indexOf(':'));
 				$('#row'+(i+1)).append('<div class="card pos-'+pos+($.inArray(name, taken)>-1?' taken':'')+($.inArray(name, star)>-1?' star':'')+'" data-name="'+name+'">'+card+'</div>');
 				if ($.inArray(name, star) > -1) {
@@ -91,7 +126,9 @@
 				}
 			});
 		});
-		
+
+		$(".filters").append($filters); //trying to only have the one DOM reflow for filters
+
 		Array.prototype.diff = function(a) {
 			return this.filter(function(i) {return a.indexOf(i) < 0;});
 		};
@@ -99,7 +136,7 @@
 		if (star_missing.length) {
 			console.log(star_missing);
 		}
-		
+
 		$('.card').click(function() {
 			if ($(this).hasClass('taken')) {
 				$(this).removeClass('taken');
@@ -119,7 +156,7 @@
 				});
 			}
 		});
-		
+
 		if (taken.length > 0) {
 			$('#content').append('<div id="button-clear">Clear Saved Picks (No longer save between page refreshes)</div>');
 			$('#button-clear').click(function(){
@@ -130,7 +167,8 @@
 				});
 			});
 		}
-		
+
+
 	</script>
-	
+
 </body>
