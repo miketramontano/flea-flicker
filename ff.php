@@ -43,6 +43,18 @@
 					padding: 10px 5px;
 				}
 			}
+			.card .btn-info {
+				background-color: white;
+				border: 1px solid black;
+				border-radius: 1em;
+				color: black;
+				cursor: help;
+				float: right;
+				font-size: 1em;
+				text-align: center;
+				width: 1em;
+			}
+			
 			#button-clear {
 				border: 2px solid red;
 				color: red;
@@ -57,6 +69,30 @@
 				position:absolute;
 				z-index: -1;
 				opacity: 0;
+			}
+			
+			.popup-info {
+				background-color: white;
+				border: 1px solid black;
+				box-shadow: 10px black;
+				height: 80%;
+				left: 10%;
+				position: fixed;
+				text-align: center;
+				top: 10%;
+				width: 80%;
+				z-index: 10;
+			}
+			.popup-info span {
+				cursor: pointer;
+				position: relative;
+			}
+			.popup-info iframe {
+				border: none;
+				height: 80%;
+				position: relative;
+				top: 1em;
+				width: 100%;
 			}
 		</style>
 	</head>
@@ -108,6 +144,7 @@
 			return $label.append($input);
 		}, $filters = $("<div>").addClass("btn-group").data("toggle", "button"), filtersApplied = [];
 
+		/** generate columns */
 		$(lists).each(function(i, val) {
 			var splits = val.split(';');
 			$(splits).each(function(j, card) {
@@ -121,7 +158,8 @@
 				}
 
 				var name = card.substr(0, card.indexOf(':'));
-				$('#row'+(i+1)).append('<div class="card pos-'+pos+($.inArray(name, taken)>-1?' taken':'')+($.inArray(name, star)>-1?' star':'')+'" data-name="'+name+'">'+card+'</div>');
+				var btnInfo = '<span class="btn-info">i</span>';
+				$('#row'+(i+1)).append('<div class="card pos-'+pos+($.inArray(name, taken)>-1?' taken':'')+($.inArray(name, star)>-1?' star':'')+'" data-name="'+name+'">'+card+btnInfo+'</div>');
 				if ($.inArray(name, star) > -1) {
 					star_found.push(name);
 				}
@@ -156,6 +194,13 @@
 					data: { add: $(this).attr('data-name') }
 				});
 			}
+		});
+		
+		$('.card .btn-info').click(function() {
+			var nameMinusTeam = $(this).parent().attr('data-name').substring(0,$(this).parent().attr('data-name').lastIndexOf(' '));
+			$('#content').append('<div class="popup-info"><span>[ Close ]</span><iframe src="http://www.nfl.com/players/search?filter='+nameMinusTeam.replace(' ','+')+'&category=name&playerType=current"><iframe></div>');
+			$('.popup-info').click(function() { $(this).remove(); });
+			return false;
 		});
 
 		if (taken.length > 0) {
