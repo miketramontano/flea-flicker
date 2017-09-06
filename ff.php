@@ -123,7 +123,7 @@
 		$(lists).each(function(i, val) {
 			var splits = val.split(';');
 			$(splits).each(function(j, card) {
-				card = card.replace(',',' ').replace(/&nbsp;/g, ' ').trim();
+				card = card.replace(',',' ').replace(/&nbsp;/g, ' ').replace('jr.', '').trim();
 				var pos = card.substr(card.indexOf(':')+1).replace(/[0-9]/g, '').trim().toLowerCase();
 				pos = pos.replace(/^def$/, 'dst').replace(/^fb$/, 'rb');
 
@@ -140,6 +140,10 @@
 				if (typeof(depth[team]) != 'undefined' && typeof(depth[team][rawName]) != 'undefined') {
 					card = card + ' <span style="color:#aaa;">[' + depth[team][rawName] + ']</span>';
 				}
+				
+				if (pos.trim() == 'dst') {
+                    name = team + ' DST';
+                }
 				
 				$('#row'+(i+1)).append('<div class="card pos-'+pos+($.inArray(name, taken)>-1?' taken':'')+($.inArray(name, star)>-1?' star':'')+'" data-name="'+name+'">'+card+'</div>');
 				if ($.inArray(name, star) > -1) {
